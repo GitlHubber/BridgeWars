@@ -5,13 +5,26 @@ import com.badlogic.gdx.Input;
 
 public class MenuController {
     public static void handle(boolean arr[]) {
-        boolean temp;
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.DOWN) ) {
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            boolean temp = arr[arr.length - 1];
+            for (int i = 1; i >= 0; --i) {
+                arr[i + 1] = arr[i];
+            }
+            arr[0] = temp;
 
+            try {
+                Thread.sleep(150);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            boolean temp = arr[0];
+            int i;
+            for (i = 0; i < arr.length - 1; ++i) {
+                arr[i] = arr[i + 1];
+            }
+            arr[i] = temp;
 
-            temp=arr[0];
-            arr[0]=arr[1];
-            arr[1]=temp;
             try {
                 Thread.sleep(150);
             } catch (InterruptedException e) {
@@ -20,11 +33,14 @@ public class MenuController {
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            if(true == arr[0]) {
+            if(arr[0]) {
                 //go to gamescreen
             }
-            if (true == arr[1]) {
-                //exit
+            if (arr[1]) {
+
+            }
+            if (arr[2]) {
+                System.exit(0);
             }
         }
     }

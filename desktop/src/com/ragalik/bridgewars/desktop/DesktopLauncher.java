@@ -16,6 +16,7 @@ public class DesktopLauncher {
 		config.width = 1366;
 		config.title = "BridgeWars";
 		config.addIcon("Icon.png", Files.FileType.Internal);
+		config.fullscreen = true;
 		new LwjglApplication(new MainMenu(), config);
 	}
 }

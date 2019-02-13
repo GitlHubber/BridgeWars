@@ -10,17 +10,17 @@ import com.ragalik.bridgewars.control.MenuController;
 public class MainMenu extends Game implements ApplicationListener {
     private Game game;
     private BridgeWars bridgeWars;
-    SpriteBatch batch;
-    Texture background;
-    Texture logo;
-    Texture exit;
-    Texture exitTap;
-    Texture play;
-    Texture playTap;
-    Texture settings;
-    Texture settingsTap;
+    private SpriteBatch batch;
+    private Texture background;
+    private Texture logo;
+    private Texture exit;
+    private Texture exitTap;
+    private Texture play;
+    private Texture playTap;
+    private Texture settings;
+    private Texture settingsTap;
 
-    boolean[] menu;
+    private boolean[] menu;
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -51,24 +51,23 @@ public class MainMenu extends Game implements ApplicationListener {
    //         game.setScreen((Screen) this);
    //     }
         batch.draw(background, 0, 0,1366,768);
-        batch.draw(logo,250,180);
+        batch.draw(logo,0,180);
         MenuController.handle(menu);
-        if (menu[0] == true) {
-            batch.draw(playTap, 800, 120);
+        if (menu[0]) {
+            batch.draw(playTap, 800, 50);
         } else {
-            batch.draw(play, 800, 120);
+            batch.draw(play, 800, 40);
         }
-        if (menu[1] == true) {
-            batch.draw(exitTap, 800, 0);
+        if (menu[1]) {
+            batch.draw(settingsTap, 800, -30);
         } else {
-            batch.draw(exit, 800, 0);
+            batch.draw(settings, 800, -40);
         }
-        if (menu[2] == true) {
-            batch.draw(settingsTap, 800, 70);
+        if (menu[2]) {
+            batch.draw(exitTap, 805, -120);
         } else {
-            batch.draw(settings, 800, 70);
+            batch.draw(exit, 805, -130);
         }
-        System.out.println(menu[0] +"   "+ menu[1]);
         batch.end();
     }
 
