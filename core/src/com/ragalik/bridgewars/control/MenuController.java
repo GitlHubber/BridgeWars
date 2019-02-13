@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public class MenuController {
-    public static void handle(boolean arr[]) {
+    public static void handle(boolean []arr) {
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             boolean temp = arr[arr.length - 1];
             for (int i = 1; i >= 0; --i) {
