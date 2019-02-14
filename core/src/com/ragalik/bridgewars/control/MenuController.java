@@ -43,5 +43,19 @@ public class MenuController {
                 System.exit(0);
             }
         }
+
+        //System.out.println(Gdx.graphics.getWidth() * 0.3 + " " + Gdx.graphics.getHeight() * 0.7);
+        if (Gdx.input.getX() >= Gdx.graphics.getWidth() * 0.71 && Gdx.input.getX() <= Gdx.graphics.getWidth() * 0.86 &&
+        Gdx.input.getY() <= Gdx.graphics.getHeight() * 0.7 && Gdx.input.getY() >= Gdx.graphics.getHeight() * 0.61)   {
+            arr[0] = true;
+            arr[1] = false;
+            arr[2] = false;
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                System.out.println("Hello");
+            }
+        } else {
+            arr[0] = false;
+        }
+
     }
 }
