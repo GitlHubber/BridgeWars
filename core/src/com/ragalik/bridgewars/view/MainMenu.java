@@ -62,8 +62,10 @@ public class MainMenu extends Game implements ApplicationListener {
         batch.draw(logoBridge,(int)(Math.tan(i_ -= 0.00001) * 70) + 20, (int)(Math.cos(i_ += 0.01) * 50) + 200,600,600);
         batch.draw(logoWars,(int)(Math.tan(i_ -= 0.00001) * 50) + 40, (int)(Math.cos(i_ += 0.01) * 50) + 195,600,600);
 
-        MenuController.handle(menu);
+        Thread thread = new HandleThread();
+        thread.start();
         menuSong.play();
+
         if (menu[0]) {
             batch.draw(playTap, 880, 50,400,400);
         } else {
@@ -95,5 +97,12 @@ public class MainMenu extends Game implements ApplicationListener {
         batch.dispose();
         background_2.dispose();
         background_3.dispose();
+    }
+
+    class HandleThread extends Thread {
+        @Override
+        public void run() {
+            MenuController.handle(menu);
+        }
     }
 }
