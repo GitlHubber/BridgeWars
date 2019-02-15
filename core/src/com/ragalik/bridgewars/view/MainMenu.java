@@ -5,7 +5,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.ragalik.bridgewars.BridgeWars;
 import com.ragalik.bridgewars.control.MenuController;
 
 public class MainMenu extends Game implements ApplicationListener {

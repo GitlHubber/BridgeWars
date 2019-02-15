@@ -1,12 +1,8 @@
 package com.ragalik.bridgewars.desktop;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Files;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.ragalik.bridgewars.BridgeWars;
 import com.ragalik.bridgewars.view.MainMenu;
 
 public class DesktopLauncher {
@@ -16,7 +12,7 @@ public class DesktopLauncher {
 		config.width = 1366;
 		config.title = "BridgeWars";
 		config.addIcon("img/Icon.png", Files.FileType.Internal);
-		config.fullscreen = false;
+		config.fullscreen = true;
 		new LwjglApplication(new MainMenu(), config);
 	}
 }

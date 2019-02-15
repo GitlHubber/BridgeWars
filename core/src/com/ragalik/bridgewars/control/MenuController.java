@@ -2,21 +2,38 @@ package com.ragalik.bridgewars.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.badlogic.gdx.audio.Music;
+import javafx.util.Pair;
 
-import javax.swing.plaf.basic.BasicTreeUI;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MenuController {
-    static int mouseX = Gdx.input.getX();
-    static int mouseY = Gdx.input.getY();
-    static boolean tap = true;
+    private static int mouseX = Gdx.input.getX();
+    private static int mouseY = Gdx.input.getY();
+    private static boolean tap = true;
+    private static Music menuSwitcher = Gdx.audio.newMusic(Gdx.files.internal("sounds/menuSwitcher.mp3"));
+    private static List<Boolean> sound = new LinkedList<>(Arrays.asList(true, true, true));
+
+    private static void updateSoundArr1 () {
+        sound.set(0, false);
+        sound.set(1, true);
+        sound.set(2, true);
+    }
+    private static void updateSoundArr2 () {
+        sound.set(0, true);
+        sound.set(1, false);
+        sound.set(2, true);
+    }
+    private static void updateSoundArr3 () {
+        sound.set(0, true);
+        sound.set(1, true);
+        sound.set(2, false);
+    }
+
     public static void handle(boolean[] arr) {
-
-
-
+        menuSwitcher.setLooping(false);
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             boolean temp = arr[arr.length - 1];
             for (int i = 1; i >= 0; --i) {
@@ -24,6 +41,7 @@ public class MenuController {
             }
             arr[0] = temp;
             tap = true;
+            menuSwitcher.play();
             try {
                 Thread.sleep(150);
             } catch (InterruptedException e) {
@@ -37,13 +55,13 @@ public class MenuController {
             }
             arr[i] = temp;
             tap = true;
+            menuSwitcher.play();
             try {
                 Thread.sleep(150);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             if(arr[0]) {
@@ -61,13 +79,17 @@ public class MenuController {
             tap = false;
         }
         System.out.println(tap);
-        if (tap == false) {
+        if (!tap) {
 
             if (Gdx.input.getX() >= Gdx.graphics.getWidth() * 0.71 && Gdx.input.getX() <= Gdx.graphics.getWidth() * 0.86 &&
                     Gdx.input.getY() <= Gdx.graphics.getHeight() * 0.7 && Gdx.input.getY() >= Gdx.graphics.getHeight() * 0.61) {
                 arr[0] = true;
                 arr[1] = false;
                 arr[2] = false;
+                if (sound.get(0)) {
+                    menuSwitcher.play();
+                    updateSoundArr1();
+                }
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     System.out.println("Hello");
                 }
@@ -77,6 +99,10 @@ public class MenuController {
                 arr[0] = false;
                 arr[1] = true;
                 arr[2] = false;
+                if (sound.get(1)) {
+                    menuSwitcher.play();
+                    updateSoundArr2();
+                }
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     System.out.println("Hello");
                 }
@@ -86,6 +112,10 @@ public class MenuController {
                 arr[0] = false;
                 arr[1] = false;
                 arr[2] = true;
+                if (sound.get(2)) {
+                    menuSwitcher.play();
+                    updateSoundArr3();
+                }
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     System.exit(0);
                 }
