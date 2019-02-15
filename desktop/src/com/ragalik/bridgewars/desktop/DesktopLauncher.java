@@ -15,8 +15,8 @@ public class DesktopLauncher {
 		config.height = 768;
 		config.width = 1366;
 		config.title = "BridgeWars";
-		config.addIcon("Icon.png", Files.FileType.Internal);
-		config.fullscreen = false;
+		config.addIcon("img/Icon.png", Files.FileType.Internal);
+		config.fullscreen = true;
 		new LwjglApplication(new MainMenu(), config);
 	}
 }
