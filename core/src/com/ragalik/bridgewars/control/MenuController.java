@@ -1,8 +1,11 @@
 package com.ragalik.bridgewars.control;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.AddListenerAction;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -14,6 +17,7 @@ public class MenuController {
     private static boolean tap = true;
     private static Music menuSwitcher = Gdx.audio.newMusic(Gdx.files.internal("sounds/menuSwitcher(1).mp3"));
     private static List<Boolean> sound = new LinkedList<>(Arrays.asList(true, true, true));
+    private Stage stage = new Stage();
 
     private static void updateSoundArr (int index) {
         sound.set(0, true);
@@ -54,7 +58,7 @@ public class MenuController {
             }
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             if(arr[0]) {
                 //go to gamescreen
             }
@@ -94,7 +98,7 @@ public class MenuController {
                     updateSoundArr(1);
                 }
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                    System.out.println("Hello");
+
                 }
             }
             if (Gdx.input.getX() >= Gdx.graphics.getWidth() * 0.71 && Gdx.input.getX() <= Gdx.graphics.getWidth() * 0.86 &&
@@ -113,5 +117,9 @@ public class MenuController {
         }
         mouseX = Gdx.input.getX();
         mouseY = Gdx.input.getY();
+    }
+
+    private void windowSettingsTransition () {
+
     }
 }
