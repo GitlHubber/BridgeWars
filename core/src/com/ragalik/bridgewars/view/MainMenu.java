@@ -7,11 +7,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ragalik.bridgewars.control.MenuController;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 public class MainMenu extends Game implements ApplicationListener {
     private double i = 0;
-    private double i_ = 0;
 
     private Music menuSong;
+    private Music menuSong1;
     private SpriteBatch batch;
     private Texture background_1;
     private Texture background_2;
@@ -24,13 +29,23 @@ public class MainMenu extends Game implements ApplicationListener {
     private Texture playTap;
     private Texture settings;
     private Texture settingsTap;
+    private Random random;
 
     private boolean[] menu;
+    private List<Music> menuSounds;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
+        random = new Random();
+
         menuSong = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+        menuSong1 = Gdx.audio.newMusic(Gdx.files.internal("music/menu1.mp3"));
+
+        menuSounds = new LinkedList<>(Arrays.asList(menuSong, menuSong1));
+        menuSong = menuSounds.get(random.nextInt(2 - 0));
+        menuSong.setVolume(0.4f);
+
         background_1 = new Texture("img/back1.png");
         background_2 = new Texture("img/back2.png");
         background_3 = new Texture("img/back3.png");
@@ -42,6 +57,7 @@ public class MainMenu extends Game implements ApplicationListener {
         playTap = new Texture("img/playTarget.png");
         settings = new Texture("img/settings.png");
         settingsTap = new Texture("img/settingsTarget.png");
+
         menu = new boolean[]{true, false, false};
     }
 
@@ -56,13 +72,14 @@ public class MainMenu extends Game implements ApplicationListener {
         batch.begin();
         batch.draw(background_1, 0, 0,1366,768);
         batch.draw(background_3, (int)(Math.sin(i += 0.004) * 100) - 50, (int)(Math.sin(i += 0.004) * 100) - 50,1366,768);
-        batch.draw(background_2, (int)(Math.cos(i_ += 0.006) * 15) + 10,  10, 1366,768);
+        batch.draw(background_2, (int)(Math.cos(i += 0.006) * 15) + 10,  10, 1366,768);
 
-        batch.draw(logoBridge,(int)(Math.tan(i_ -= 0.00001) * 70) + 20, (int)(Math.cos(i_ += 0.01) * 50) + 200,600,600);
-        batch.draw(logoWars,(int)(Math.tan(i_ -= 0.00001) * 50) + 40, (int)(Math.cos(i_ += 0.01) * 50) + 195,600,600);
+        batch.draw(logoBridge,(int)(Math.tan(i -= 0.00001) * 70) + 20, (int)(Math.cos(i += 0.01) * 50) + 200,600,600);
+        batch.draw(logoWars,(int)(Math.tan(i -= 0.00001) * 50) + 40, (int)(Math.cos(i += 0.01) * 50) + 195,600,600);
 
         Thread thread = new HandleThread();
         thread.start();
+
         menuSong.play();
 
         if (menu[0]) {
