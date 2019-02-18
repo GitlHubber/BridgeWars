@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import static com.ragalik.bridgewars.control.MenuController.check;
+
 public class MainMenu extends Game implements ApplicationListener {
     private double i = 0;
 
@@ -29,6 +31,7 @@ public class MainMenu extends Game implements ApplicationListener {
     private Texture playTap;
     private Texture settings;
     private Texture settingsTap;
+    private Texture settingsWin;
     private Random random;
 
     private boolean[] menu;
@@ -57,6 +60,7 @@ public class MainMenu extends Game implements ApplicationListener {
         playTap = new Texture("img/playTarget.png");
         settings = new Texture("img/settings.png");
         settingsTap = new Texture("img/settingsTarget.png");
+        settingsWin = new Texture("img/settingsWin.png");
 
         menu = new boolean[]{true, false, false};
     }
@@ -81,6 +85,10 @@ public class MainMenu extends Game implements ApplicationListener {
         thread.start();
 
         menuSong.play();
+
+        if (check()) {
+            batch.draw(settingsWin, 0, 0);
+        }
 
         if (menu[0]) {
             batch.draw(playTap, 880, 50,400,400);

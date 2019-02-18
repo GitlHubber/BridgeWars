@@ -1,11 +1,9 @@
 package com.ragalik.bridgewars.control;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.AddListenerAction;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -17,7 +15,7 @@ public class MenuController {
     private static boolean tap = true;
     private static Music menuSwitcher = Gdx.audio.newMusic(Gdx.files.internal("sounds/menuSwitcher(1).mp3"));
     private static List<Boolean> sound = new LinkedList<>(Arrays.asList(true, true, true));
-    private Stage stage = new Stage();
+    private static boolean flag = false;
 
     private static void updateSoundArr (int index) {
         sound.set(0, true);
@@ -63,7 +61,7 @@ public class MenuController {
                 //go to gamescreen
             }
             if (arr[1]) {
-
+                flag = true;
             }
             if (arr[2]) {
                 System.exit(0);
@@ -98,7 +96,7 @@ public class MenuController {
                     updateSoundArr(1);
                 }
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-
+                    flag = true;
                 }
             }
             if (Gdx.input.getX() >= Gdx.graphics.getWidth() * 0.71 && Gdx.input.getX() <= Gdx.graphics.getWidth() * 0.86 &&
@@ -119,7 +117,7 @@ public class MenuController {
         mouseY = Gdx.input.getY();
     }
 
-    private void windowSettingsTransition () {
-
+    public static boolean check () {
+        return flag;
     }
 }
